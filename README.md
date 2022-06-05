@@ -10,18 +10,23 @@
 ![image](https://user-images.githubusercontent.com/82525776/172052383-9ad08a1f-2419-43ae-b246-d28221d5c4c9.png)
 
 
-- top에서 상단에 위치한 요약영역:
-- 시스템 현재 시간(GMT 기준), OS가 살아있는 시간, 유저 세션 수 
-- 로드 애버리지(Load Average) : CPU Load(CPU가 수행하는 작업의 양)의 이동 평균을 표시한다. 리눅스에서는 실행되거나 대기중인 프로세스의 평균이다.
+- top에서 상단에 위치한 요약영역: 시스템 현재 시간(GMT 기준), OS가 살아있는 시간, 유저 세션 수 
 
+
+- 로드 애버리지(Load Average) : CPU Load(CPU가 수행하는 작업의 양)의 이동 평균을 표시한다. 리눅스에서는 실행되거나 대기중인 프로세스의 평균이다.
 - 테스크(Tasks): 2번째 줄에 출력되는 내용으로 현재 프로세스들의 상태를 나타내주는 영역이다.
 - Total은 전체 프로세스, running은 running 상태인 프로세스, sleeping은 대기상태인 process, stopped는 종료된 프로세스, zombies는 좀비상태인 프로세스의 수를 나타낸다.
 
-- 실행(Runnable) - CPU에 의해서 명령어가 실행중인 Process
-- 준비(Ready) - CPU의 명령어 실행을 기다리는 Process
-- 대기(Waiting) - I/O operation이 끝나기를 기다리는 Process
-- 종료(Terminated) - Ctrl + Z 등의 signal로 종료된 Process
-- Zombie - Process는 root Process로 부터 뿌리내린 자식 Process의 형식으로 트리구조를 형성한다. 이 때 부모가 먼저 종료된다면 root process로 부터 닿을 수 없는 Process가 생기고 이를 zombie process라고 부른다.
+
+-실행(Runnable) : CPU에 의해서 명령어가 실행중인 Process
+
+-준비(Ready) : CPU의 명령어 실행을 기다리는 Process
+
+-대기(Waiting) : I/O operation이 끝나기를 기다리는 Process
+
+-종료(Terminated) : Ctrl + Z 등의 signal로 종료된 Process
+
+-Zombie : Process는 root Process로 부터 뿌리내린 자식 Process의 형식으로 트리구조를 형성한다. 이 때 부모가 먼저 종료된다면 root process로 부터 닿을 수 없는 Process가 생기            고 이를 zombie process라고 부른다.
 
 
 
@@ -102,9 +107,9 @@
 ## ***vim 에디터 매크로 사용방법***
 ---
 ### **<매크로 설정하는 법>**
-- 1) vim의 중립모드에서 `q`를 누른 다음 매크로 이름으로 사용할 알파벳을 눌러준다. 
-- 2) 예를 들어 매크로 이름을 a로 해서 `qa`라고 누르면 밑에 --recording-- 이라는 문구가 뜨면서 a라는 매크로의 기록이 시작된다. 
-- 3) 원하는 동작들의 입력이 끝나면 다시 중립모드에서 `q`를 눌러준다. 
+1) vim의 중립모드에서 `q`를 누른 다음 매크로 이름으로 사용할 알파벳을 눌러준다. 
+2) 예를 들어 매크로 이름을 a로 해서 `qa`라고 누르면 밑에 --recording-- 이라는 문구가 뜨면서 a라는 매크로의 기록이 시작된다. 
+3) 원하는 동작들의 입력이 끝나면 다시 중립모드에서 `q`를 눌러준다. 
 
 ### **<매크로 재생하는 법>**
 - 중립모드에서 `@a`를 누르면 매크로 a가 재생된다.
