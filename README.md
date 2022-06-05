@@ -4,7 +4,34 @@
 현재 OS의 상태를 나타내주는 CLI 어플리케이션으로, 메모리 사용량, CPU 사용량 등을 나타내준다.
 - 전체 프로세스가 OS에 대해서 리소스를 어느정도 차지하고 있는지를 알려준다.
 - 시간, 유저, 로드 에버리지, 테스크, CPU, 메모리 값을 확인할 수 있다.
-             
+
+![image](https://user-images.githubusercontent.com/82525776/172052383-9ad08a1f-2419-43ae-b246-d28221d5c4c9.png)
+
+||64비트 프로세스들을 보여준다.|
+|-m|프로세스들 뿐만 아니라 커널 스레드들도 보여준다.|
+|-p|특정 PID를 지정할 때 사용한다.|
+|-r|현재 실행 중인 프로세서를 보여준다.|
+|u(BSD)|프로세스의 소유자를 기준으로 출력한다.|
+|-u|특정 사용자의 프로세스 정보를 확인할 때 사용한다. 사용자를 지정하지 않으면 현재 사용자가 기준이다.|
+|x(BSD)| 데몬 프로세스처럼 터미널에 종속되지 않는 프로세스를 출력한다. 보통 a옵션과 결합하여 모든 프로세스를 출력할 때 사용한다.|
+|-x|로그인 상태에 있는 동안 아직 완료되지 않은 프로세서들을 보여준다. -x 옵션을 사용하면 자신의 터미널이 없는 프로세서들을 확인할 수 있다. |
+
+
+- top에서 상단에 위치한 요약영역:
+- 시스템 현재 시간(GMT 기준), OS가 살아있는 시간, 유저 세션 수 
+- 로드 애버리지(Load Average) : CPU Load(CPU가 수행하는 작업의 양)의 이동 평균을 표시한다. 리눅스에서는 실행되거나 대기중인 프로세스의 평균이다.
+
+- 테스크(Tasks): 2번째 줄에 출력되는 내용으로 현재 프로세스들의 상태를 나타내주는 영역이다.
+- Total은 전체 프로세스, running은 running 상태인 프로세스, sleeping은 대기상태인 process, stopped는 종료된 프로세스, zombies는 좀비상태인 프로세스의 수를 나타낸다.
+
+- 실행(Runnable) - CPU에 의해서 명령어가 실행중인 Process
+- 준비(Ready) - CPU의 명령어 실행을 기다리는 Process
+- 대기(Waiting) - I/O operation이 끝나기를 기다리는 Process
+- 종료(Terminated) - Ctrl + Z 등의 signal로 종료된 Process
+- Zombie - Process는 root Process로 부터 뿌리내린 자식 Process의 형식으로 트리구조를 형성한다. 이 때 부모가 먼저 종료된다면 root process로 부터 닿을 수 없는 Process가 생기고 이를 zombie process라고 부른다.
+
+
+
 ### 2) **ps**:
 - **$ ps [option]**
 - 프로세스의 약자로 추정되는 명령어 ps는 현재 돌아가고 있는 프로세스를 확인할 수 있는 명령어이다.
@@ -37,9 +64,38 @@
 - 기본적으로 PID(프로세스 번호), TTY(프로세스가 연결된 터미널), TIME(총 CPU 사용시간), CMD(프로세스의 실행 명령행) 가 출력된다.
 
 ### 2) **jobs**:
+-  **$ jobs**
+- jobs는 작업의 상태를 표시하는 명령어다. 현재 쉘 세션에서 실행시킨 백그라운드 작업의 목록이 출력되며, 각 작업에는 번호가 붙어 있어 kill 명령어 뒤에 '%번호' 등으로 사용할 수 있다. 
+- jobs로 출력되는 백그라운드 작업의 상태값은 다음의 표와 같다.
 
+|상태|설명|
+|:---:|:---:|
+|Running|작업이 계속 진행중임|
+|Done|작업이 완료되어 0을 반환|
+|Done(code)|작업이 종료되었으며 0이 아닌 코드를 반환|
+|Stopped|작업이 일시 중단|
+|Stopped(SIGTSTP)|SIGTSTP 시그널이 작업을 일시 중단|
+|Stopped(SIGSTOP)|SIGSTOP 시그널이 작업을 일시 중단|
+|Stopped(SIGTTIN)|SIGTTIN 시그널이 작업을 일시 중단|
+|Stopped(SIGTTOU)|SIGTTOU 시그널이 작업을 일시 중단|
 
 ### 2) **kill**:
+- **$kill [옵션 or 시그널(번호 또는 이름)] PID**
+- 프로세스에 특정한 signal을 보내는 명령어일반적으로 종료되지 않는 프로세스를 종료 시킬 때 많이 사용한다.
+
+SIGHUP : 연결 끊기. 프로세스의 설정파일을 다시 읽음
+SIGINT : 인터럽트
+SIGQUIT : 종료
+SIGILL : 잘못된 명령
+SIGTRAP : 트렙 추적
+SIGABRT 
+SIGBUS : 버스 에러 
+SIGFPE : 고정 소수점 예외
+SIGKILL : 죽이기
+SIGUSR1
+SIGSEGV : 세그멘테이션 위반
+SIGUSR2      13) SIGPIPE : 읽을 것이 없는 파이프에 대한 시그널14) SIGALRM      : 경고 클럭15) SIGTERM : 소프트웨어 종료 시그널16) SIGSTKFLT : 프로세서 스택 실패17) SIGCHLD : 자식 프로세서의 상태변화18) SIGCONT : STOP 시그널 이후 계속 진행할 때 사용19) SIGSTOP       : 정지20) SIGTSTP : 키보드에 의해 발생하는 시그널
+
 
 
         
